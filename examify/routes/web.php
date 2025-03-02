@@ -31,6 +31,14 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
+
+
+Route::get('/test-middleware', function () {
+    $middleware = app('router')->getMiddleware();
+    dd($middleware);
+});
+
+
 // Protected routes (require login)
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {

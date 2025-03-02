@@ -1,4 +1,16 @@
 <?php
+
+<?php
+namespace App\Http;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+class Kernel extends HttpKernel {
+    public function __construct() {
+        file_put_contents('C:\xampp\htdocs\exam\examify\kernel_debug.txt', 'Kernel loaded');
+        parent::__construct(...func_get_args());
+    }
+    // ... rest of the file ...
+}
+?>
 namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel {
