@@ -2,7 +2,7 @@
 CREATE TABLE `users` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
-    `email` VARCHAR(255) NOT NULL UNIQUE,
+    `email` VARCHAR(191) NOT NULL UNIQUE,  -- Reduced to 191 for key length safety
     `password` VARCHAR(255) NOT NULL,
     `role` ENUM('admin', 'student') DEFAULT 'student',
     `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
@@ -17,7 +17,7 @@ CREATE TABLE `exams` (
     `description` TEXT,
     `duration` INT NOT NULL COMMENT 'in minutes',
     `start_time` TIMESTAMP NOT NULL,
-    `end_time` TIMESTAMP NOT NULL,
+    `end_time` TIMESTAMP NULL DEFAULT NULL,  -- Fixed to allow NULL
     `user_id` BIGINT UNSIGNED NOT NULL COMMENT 'Admin who created the exam',
     `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -65,4 +65,4 @@ CREATE TABLE `results` (
 
 -- Insert default admin user
 INSERT INTO `users` (`name`, `email`, `password`, `role`, `created_at`, `updated_at`)
-VALUES ('Admin', 'admin@example.com', '$2y$10$X./p8gW7eZ3K9Qz7tY7LNe8wX5Y5K5Q5Z5K5Q5Z5K5Q5Z5K5Q5Z5K', 'admin', NOW(), NOW());
+VALUES ('Admin', 'admin@example.com', '$2y$10$Xk9p8gW7eZ3K9Qz7tY7LNe8wX5Y5K5Q5Z5K5Q5Z5K5Q5Z5K5Q5Z5K', 'admin', NOW(), NOW());
